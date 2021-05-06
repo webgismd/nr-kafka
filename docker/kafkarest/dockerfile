@@ -1,0 +1,4 @@
+FROM confluentinc/cp-kafka-rest:6.1.1
+USER 0 
+RUN chgrp -R 0 /home/appuser && chmod -R g=u /home/appuser
+USER appuser
