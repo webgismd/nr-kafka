@@ -71,3 +71,33 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
+
+docker build .
+
+docker run -it --user 123:0 --net=host --name=zookeeper -e ZOOKEEPER_CLIENT_PORT=32181 -e ZOOKEEPER_TICK_TIME=2000 -e ZOOKEEPER_SYNC_LIMIT=2 zookeeper
+docker rm -f zookeeper
+
+docker run -it --user 123:0  --name=kafka -e KAFKA_ZOOKEEPER_CONNECT=localhost:32181 -e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://localhost:29092 -e KAFKA_BROKER_ID=2 -e KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1  kafka
+
+
+docker run -it --net=host --name=zookeeper -e ZOOKEEPER_CLIENT_PORT=32181 -e ZOOKEEPER_TICK_TIME=2000 -e ZOOKEEPER_SYNC_LIMIT=2 confluentinc/cp-zookeeper:6.1.1
+
+docker run -it --net=host --name=kafka -e KAFKA_ZOOKEEPER_CONNECT=localhost:32181 -e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://localhost:29092 -e KAFKA_BROKER_ID=2 -e KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1 confluentinc/cp-kafka:6.1.1
+
+docker run -d \
+  --net=host \
+  --name=schema-registry \
+  -e SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS=SSL://hostname2:9092 \
+  -e SCHEMA_REGISTRY_HOST_NAME=localhost \
+  -e SCHEMA_REGISTRY_LISTENERS=http://localhost:8081 \
+  -e SCHEMA_REGISTRY_DEBUG=true \
+  confluentinc/cp-schema-registry:6.1.1
+
+  docker run -d \
+  --net=host \
+  --name=kafka-rest \
+  -e KAFKA_REST_ZOOKEEPER_CONNECT=localhost:32181 \
+  -e KAFKA_REST_LISTENERS=http://localhost:8082 \
+  -e KAFKA_REST_SCHEMA_REGISTRY_URL=http://localhost:8081 \
+  -e KAFKA_REST_BOOTSTRAP_SERVERS=localhost:29092 \
+  confluentinc/cp-kafka-rest:6.1.1
