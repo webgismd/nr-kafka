@@ -351,9 +351,7 @@ oc  start-build cp-kafka --follow
 
 
 oc create -f createimagestream.yaml
-imagestream.image.openshift.io/kafka-rest created
 
 oc create -f buildconfig.yaml
-buildconfig.build.openshift.io/cp-kafka-rest created
 
-oc  start-build cp-kafka-rest --follow
+oc  start-build cp-schema-registry --follow
