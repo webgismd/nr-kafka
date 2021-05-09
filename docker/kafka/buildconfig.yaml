@@ -16,6 +16,8 @@ spec:
   strategy:
     type: Docker
     dockerStrategy:
+      pullSecret:
+        name: artifactory-creds
       dockerfilePath: kafka/dockerfile
   output:
     to:
