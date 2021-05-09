@@ -1,10 +1,10 @@
 apiVersion: build.openshift.io/v1
 kind: BuildConfig
 metadata:
-  name: cp-kafka
+  name: cp-zookeeper
   namespace: c2053d-dev
   labels:
-     app: kafka
+     app: zookeeper
 spec:
   imagePullSecrets:
     - name: artifactory-creds
@@ -20,4 +20,4 @@ spec:
   output:
     to:
       kind: ImageStreamTag
-      name: 'kafka:6.1.1'
+      name: 'zookeeper:6.1.1'
