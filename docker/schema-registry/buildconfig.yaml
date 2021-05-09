@@ -1,0 +1,25 @@
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  name: cp-schema-registry
+  namespace: c2053d-dev
+  labels:
+     app: schema-registry
+spec:
+  imagePullSecrets:
+    - name: artifactory-creds
+  source:
+    type: Git
+    git:
+      uri: 'https://github.com/webgismd/nr-kafka'
+    contextDir: docker
+  strategy:
+    type: Docker
+    dockerStrategy:
+      pullSecret:
+        name: artifactory-creds
+      dockerfilePath: schema-registry/dockerfile
+  output:
+    to:
+      kind: ImageStreamTag
+      name: 'schema-registry:6.1.1'

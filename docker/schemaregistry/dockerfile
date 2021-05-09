@@ -1,8 +1,0 @@
-FROM confluentinc/cp-schema-registry:6.1.1
-USER 0 
-RUN userdel appuser
-RUN useradd -r -u 1000879999 -g 0 appuser
-RUN chgrp -R 0 /home/appuser && chmod g=u /home/appuser
-RUN chgrp -R 0 /var/lib && chmod g=u /var/lib
-
-USER appuser

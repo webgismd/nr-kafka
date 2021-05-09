@@ -1,0 +1,7 @@
+apiVersion: image.openshift.io/v1
+kind: ImageStream
+metadata:
+  name: schema-registry
+  namespace: c2053d-dev
+  labels:
+    app: schema-registry

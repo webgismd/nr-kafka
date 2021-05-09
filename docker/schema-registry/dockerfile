@@ -1,0 +1,6 @@
+FROM docker-remote.artifacts.developer.gov.bc.ca/confluentinc/cp-schema-registry:6.1.1
+USER 0 
+RUN set -x && \
+    chgrp -R 0 /home/appuser && chmod g=u /home/appuser && \
+    chgrp -R 0 /var/lib && chmod g=u /var/lib 
+USER appuser
