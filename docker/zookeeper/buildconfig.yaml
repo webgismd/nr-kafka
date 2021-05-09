@@ -18,7 +18,7 @@ spec:
     dockerStrategy:
       pullSecret:
         name: artifactory-creds
-      dockerfilePath: kafka/dockerfile
+      dockerfilePath: zookeeper/dockerfile
   output:
     to:
       kind: ImageStreamTag
