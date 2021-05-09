@@ -1,0 +1,21 @@
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  name: cp-kafka
+  namespace: c2053d-dev
+  labels:
+     app: kafka
+spec:
+  source:
+    type: Git
+    git:
+      uri: 'https://github.com/webgismd/nr-kafka'
+    contextDir: docker
+  strategy:
+    type: Docker
+    dockerStrategy:
+      dockerfilePath: kafka/dockerfile
+  output:
+    to:
+      kind: ImageStreamTag
+      name: 'kafka:6.1.1'

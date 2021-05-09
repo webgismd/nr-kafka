@@ -333,8 +333,7 @@ f89481ebdaf5   4 minutes ago   USER appuser                                    0
 <missing>      3 weeks ago                                                     4.7kB
 <missing>      3 weeks ago                                                     103MB     Imported from -
 
-C:\sw_nt\Git\nr-kafka\docker\zookeeper>
-C:\sw_nt\Git\nr-kafka\docker\zookeeper>docker image ls
+docker image ls
 REPOSITORY                            TAG       IMAGE ID       CREATED         SIZE
 kafka-rest                            6.1.1     f89481ebdaf5   4 minutes ago   769MB
 kafka                                 6.1.1     f89481ebdaf5   4 minutes ago   769MB
@@ -343,3 +342,9 @@ zookeeper                             6.1.1     f89481ebdaf5   4 minutes ago   7
 registry.redhat.io/rhel8/go-toolset   latest    2cce76bd76d5   3 weeks ago     1.02GB
 
 ```
+
+
+oc create -f buildconfig.yaml
+buildconfig.build.openshift.io/cp-kafka created
+
+oc  start-build cp-kafka --follow
